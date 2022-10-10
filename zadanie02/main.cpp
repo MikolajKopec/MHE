@@ -11,6 +11,13 @@ struct light_up {
         std::copy(start,end,result.begin());
         return result;
     }
+//    std::vector<int> get_column(int x){
+//        std::vector<int> result(size);
+//        for(int i=x-1;i<size*size;i=+size){
+//            result.push_back(board.at(i));
+//        }
+//        return result;
+//    }
 };
 
 std::ostream &operator<<(std::ostream &o, const light_up &puzzle){
@@ -41,19 +48,31 @@ std::ostream &operator<<(std::ostream &o, const light_up &puzzle){
 
     return o;
 }
-
 bool check_if_bulb_is_alone(std::vector<int> row){
+    using namespace std;
     bool is_bulb = false;
     for (int field:row) {
+        if(is_bulb && field==-4){
+            return false;
+        }else if(is_bulb && field>=0){
+            is_bulb = false;
+        }
         if (field==-4){
             is_bulb = true;
-        }else{
-        if(is_bulb && field==-4){
-            return 0;
         }
+
+    }
+    return true;
+}
+bool check_if_bulbs_are_alone(light_up puzzle){
+    for(int i=0;i<puzzle.size;i++){
+        bool bulbs_in_row = check_if_bulb_is_alone(puzzle.get_row(i));
+//        bool bulbs_in_columns = check_if_bulb_is_alone(puzzle.get_column(i));
+        if(!bulbs_in_row){
+            return false;
         }
     }
-    return 1;
+
 }
 
 int main() {
@@ -75,11 +94,6 @@ int main() {
             -3,-3,-3,-3,-3,-3,-3
         }
     };
-    std::vector<int> z = puzzle.get_row(1);
-//    for (int i=0;i<puzzle.size;i++){
-//        cout<<check_if_bulb_is_alone(puzzle.get_row(i));
-//    }
     cout<<puzzle;
-
     return 0;
 }
