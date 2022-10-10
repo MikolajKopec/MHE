@@ -1,6 +1,6 @@
 # MHE
 
-//OZNACZENIA PÓL W TABLICY
+OZNACZENIA PÓL W TABLICY
  -4 = bulb
  -3 = nieoświetlone
  -2 = oświetlone
