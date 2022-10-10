@@ -21,4 +21,5 @@ Puzzle polegają na ustawieniu żarówek w odpowiednich miejscach, tak żeby oś
   - W taki sposób żeby żarówka nie świeciła na inną żarówkę -> 
 
 //10.10.2022 - Zadanie02
+
 Program mający na celu przedstawienie struktury wykorzystywanej później do rozwiązywania gry logicznej typu light up.
