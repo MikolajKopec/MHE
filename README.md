@@ -1,11 +1,11 @@
 # MHE
 
 //OZNACZENIA PÓL W TABLICY
-// -4 = bulb
-// -3 = nieoświetlone
-// -2 = oświetlone
-// 0,1,2,3,4 = czarne z liczba
-// 5 = czarny bez liczby
+ -4 = bulb
+ -3 = nieoświetlone
+ -2 = oświetlone
+ 0,1,2,3,4 = czarne z liczba
+ 5 = czarny bez liczby
 
 
 Light Up (puzzle) - https://en.wikipedia.org/wiki/Light_Up_(puzzle):
