@@ -7,7 +7,7 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/home/kali/Desktop/NAI/Lab04/CMakeLists.txt"
+  "/home/kali/Desktop/MHE/zadanie03/CMakeLists.txt"
   "CMakeFiles/3.24.2/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.24.2/CMakeSystem.cmake"
   "/usr/share/cmake-3.24/Modules/CMakeCXXInformation.cmake"
@@ -18,10 +18,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake"
   "/usr/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake"
   "/usr/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
-  "/usr/share/cmake-3.24/Modules/Compiler/Clang-CXX.cmake"
-  "/usr/share/cmake-3.24/Modules/Compiler/Clang.cmake"
+  "/usr/share/cmake-3.24/Modules/Compiler/GNU-CXX.cmake"
   "/usr/share/cmake-3.24/Modules/Compiler/GNU.cmake"
-  "/usr/share/cmake-3.24/Modules/Platform/Linux-Clang-CXX.cmake"
   "/usr/share/cmake-3.24/Modules/Platform/Linux-GNU-CXX.cmake"
   "/usr/share/cmake-3.24/Modules/Platform/Linux-GNU.cmake"
   "/usr/share/cmake-3.24/Modules/Platform/Linux.cmake"

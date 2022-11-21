@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kali/Desktop/NAI/Lab04
+CMAKE_SOURCE_DIR = /home/kali/Desktop/MHE/zadanie03
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kali/Desktop/NAI/Lab04/build
+CMAKE_BINARY_DIR = /home/kali/Desktop/MHE/zadanie03/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -81,14 +81,14 @@ clean: CMakeFiles/mhedemoapp.dir/clean
 CMakeFiles/mhedemoapp.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mhedemoapp.dir/build.make CMakeFiles/mhedemoapp.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mhedemoapp.dir/build.make CMakeFiles/mhedemoapp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/kali/Desktop/NAI/Lab04/build/CMakeFiles --progress-num=1,2 "Built target mhedemoapp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/kali/Desktop/MHE/zadanie03/build/CMakeFiles --progress-num=1,2 "Built target mhedemoapp"
 .PHONY : CMakeFiles/mhedemoapp.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/mhedemoapp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kali/Desktop/NAI/Lab04/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kali/Desktop/MHE/zadanie03/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/mhedemoapp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kali/Desktop/NAI/Lab04/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kali/Desktop/MHE/zadanie03/build/CMakeFiles 0
 .PHONY : CMakeFiles/mhedemoapp.dir/rule
 
 # Convenience name for target.
