@@ -1,3 +1,0 @@
-/home/kali/Desktop/MHE/zadanie03/build/CMakeFiles/mhedemoapp.dir
-/home/kali/Desktop/MHE/zadanie03/build/CMakeFiles/edit_cache.dir
-/home/kali/Desktop/MHE/zadanie03/build/CMakeFiles/rebuild_cache.dir
