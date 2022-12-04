@@ -1,3 +1,2 @@
-.vscode
-debug.log
-data/
+cmake-build-debug/
+.idea/
