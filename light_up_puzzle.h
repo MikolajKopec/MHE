@@ -18,3 +18,4 @@
 #include "./algs/hill_climbing.h"
 #include "./algs/random_hill_climbing.h"
 #include "./algs/tabu.h"
+#include "./algs/simulated_annealing.h"

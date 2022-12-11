@@ -1,8 +1,8 @@
 //
 // Created by mikol on 05.12.2022.
 //
+#include "services.h"
 
-#include "puzzle.h"
 int evaluate_number = 0;
 
 int light_up::get_row_index_by_element_index(int i){
@@ -209,6 +209,7 @@ light_up light_up::find_best_neighbor(light_up &basic_board){
     }
     return best_neighbor;
 }
+
 std::ostream &operator<<(std::ostream &o, const light_up &puzzle){
     using namespace std;
     for (int y = 0; y<puzzle.size;y++){

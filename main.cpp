@@ -17,6 +17,7 @@ int main(int argc, char **argv) {
     my_functions["hill_climb"] = hill_climbing;
     my_functions["r_hill_climb"] = random_hill_climbing;
     my_functions["tabu"] = tabu;
+    my_functions["simulated_annealing"] = simulated_annealing;
     try{
         string selected_function = argv[1];
         int number_of_iterations = atoi(argv[2]);
