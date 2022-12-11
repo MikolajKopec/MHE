@@ -1,5 +1,6 @@
 #include "services.h"
 
+
 std::random_device rd;
 std::mt19937 mt_generator(rd());
 
@@ -20,4 +21,24 @@ bool check_if_puzzles_is_this_same(light_up puzzle1,light_up puzzle2){
         }
     }
     return true;
+}
+light_up find_random_neighbor(light_up &basic_board,light_up puzzle){
+    std::uniform_int_distribution<int> dist(0,basic_board.size);
+    int field_number = dist(mt_generator);
+    bool neigbor_correct = false;
+    light_up random_neighbor;
+    do{
+        random_neighbor = {puzzle.size,puzzle.board};
+        if(random_neighbor.board[field_number]>=0){
+            continue;
+        }
+        neigbor_correct = true;
+        if(random_neighbor.board[field_number] == -2){
+            random_neighbor.board[field_number] = -4;
+        }else if(random_neighbor.board[field_number] == -4){
+            random_neighbor.board[field_number] = -2;
+        }
+    } while (!neigbor_correct);
+
+    return random_neighbor;
 }
