@@ -8,7 +8,7 @@ Aktualnie zaimplementowane algorytmy:
 - Wspinaczkowy i Wspinaczkowy niedeterministyczny
 - Pełny przegląd (Brute Force)
 - Losowe próbkowanie
-
+- Simulated annealing
 
 //OZNACZENIA PÓL W TABLICY
 // -4 = bulb
