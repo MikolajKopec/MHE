@@ -4,7 +4,7 @@
 
 #ifndef MHE1_SIMULATED_ANNEALING_H
 #define MHE1_SIMULATED_ANNEALING_H
-
+#include "../puzzle/puzzle.h"
 #include <map>
 #include <any>
 
