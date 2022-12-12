@@ -1,7 +1,7 @@
 //
 // Created by mikol on 05.12.2022.
 //
-#include "services.h"
+#include "puzzle.h"
 
 int evaluate_number = 0;
 
@@ -77,6 +77,7 @@ void light_up::light_column(int bulb_index){
 void light_up::light_row(int bulb_index){
     // std::cout<<"########\n"<<puzzle;
     int row = get_row_index_by_element_index(bulb_index);
+//    std::cout<<row<<std::endl;
     for(int i = bulb_index; i<size*(row+1);i++){
         light_up_field(i);
         if (board[i]>=0){
@@ -164,6 +165,16 @@ int light_up::check_if_bulbs_are_next_to_squares(){
     }
     return result;
 }
+void light_up::turn_off_all_lights(){
+    int i = 0;
+    for(auto field : board){
+        if(field==-2){
+            board[i] = -3;
+        }
+        i++;
+    }
+
+}
 int light_up::evaluate_puzzle(light_up &board_to_solve){
     evaluate_number++;
     int result = 0;
@@ -172,6 +183,7 @@ int light_up::evaluate_puzzle(light_up &board_to_solve){
             board[i] = board_to_solve.board[i];
         }
     }
+    turn_off_all_lights();
     light_up_where_is_bulb();
     result += check_if_bulbs_are_alone();
 //        std::cout<<"rating after bulbs_alone"<<result<<std::endl;
@@ -188,7 +200,7 @@ light_up light_up::find_best_neighbor(light_up &basic_board){
     light_up current_neighbor = best_neighbor;
     int i = 0;
     for(auto field : current_neighbor.board){
-        if(field == -2 || field == -3){
+        if(field == -3){
             current_neighbor.board[i] = -4;
         }else if(field == -4){
             current_neighbor.board[i] = -3;
@@ -199,7 +211,7 @@ light_up light_up::find_best_neighbor(light_up &basic_board){
             // std::cout<<"rating: "<<best_neighbor.rating<<std::endl;
             best_neighbor = current_neighbor;
         }else{
-            if(current_neighbor.board[i] == -2 || field == -3){
+            if(field == -3){
                 current_neighbor.board[i] = -4;
             }else if(current_neighbor.board[i] == -4){
                 current_neighbor.board[i] = -3;

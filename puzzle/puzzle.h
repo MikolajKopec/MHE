@@ -24,6 +24,7 @@ struct light_up {
     int check_field_neighbors(int field_index);
     int check_if_bulbs_are_next_to_squares();
     int evaluate_puzzle(light_up &board_to_solve);
+    void turn_off_all_lights();
 
     light_up find_best_neighbor(light_up &basic_board);
 };

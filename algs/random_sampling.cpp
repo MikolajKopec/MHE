@@ -21,7 +21,7 @@ std::map<std::string,std::any> find_resolve_random_sample(light_up board_to_solv
         rating.push_back(used_samples[i].rating);
 //        std::cout<<"res rating"<<used_samples[i].rating<<std::endl;
         i=i+1;
-    }while (res != 0);
+    }while (i<iterations);
 //    std::cout<<used_samples.back();
 //    std::cout<<"Proba numer: "<<i<<std::endl;
     result["puzzle"] = used_samples[i-1];

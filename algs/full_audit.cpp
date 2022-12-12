@@ -3,11 +3,9 @@
 //
 
 #include <map>
-#include <string>
 #include <any>
 #include <algorithm>
 #include "full_audit.h"
-#include "../puzzle/puzzle.h"
 
 std::map<std::string,std::any> find_resolve_full_audit(light_up board_to_solve,int iterations){
     std::map<std::string,std::any> result;
