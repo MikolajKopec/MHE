@@ -7,7 +7,7 @@
 #include "./algs/random_hill_climbing.h"
 #include "./algs/tabu.h"
 #include "./algs/simulated_annealing.h"
-
+#include "./genetic/genetic.h"
 extern int evaluate_number;
 
 bool check_arg(std::string x){
@@ -54,9 +54,6 @@ int main(int argc, char **argv) {
         bool all = false;
 //    }
         if(selected_function == "all"){
-            all = true;
-        }
-        if(all){
             for(auto x_function :my_functions){
                 std::chrono::time_point<std::chrono::system_clock> start, end;
                 start = std::chrono::system_clock::now();
@@ -92,12 +89,34 @@ int main(int argc, char **argv) {
 
         std::chrono::time_point<std::chrono::system_clock> start, end;
         start = std::chrono::system_clock::now();
-        auto s_function = my_functions.at(selected_function);
-        std::map<std::string,std::any> resolve = s_function(puzzle_from_file,number_of_iterations);
+            std::map<std::string,std::any> resolve;
+        if(selected_function == "gen"){
+                resolve = genetic_alg(puzzle_from_file,number_of_iterations,0.4);
+            }else{
+                auto s_function = my_functions.at(selected_function);
+                resolve = s_function(puzzle_from_file,number_of_iterations);
+            }
         end = std::chrono::system_clock::now();
         std::chrono::duration<double> elapsed_seconds = end - start;
+        int resolve_rating = 0;
         if(show_resolve){
+            if(selected_function=="gen"){
+                phenotype_t x = std::any_cast<chromosome_t>(resolve["puzzle"]);
+                for(int i =0;i<x.size();i++){
+                    if(x[i]==1){
+                        x[i] = -4;
+                    }else{
+                        x[i] = -3;
+                    }
+                }
+                light_up result = {puzzle_from_file.size,x};
+                result.evaluate_puzzle(puzzle_from_file);
+//                result.light_up_where_is_bulb();
+                cout<<result;
+                resolve_rating = result.rating;
+            }else{
             cout<<std::any_cast<light_up>(resolve["puzzle"]);
+            }
         }
         if(show_time){
             cout<<"Czas dzialania: "<<elapsed_seconds.count()<<"s"<<endl;
@@ -106,12 +125,16 @@ int main(int argc, char **argv) {
             cout<<"Evaluate count: "<<std::any_cast<int>(evaluate_number)<<endl;
         }
         if(show_resolve_rating){
+            if(selected_function == "gen"){
+                cout<<"resolve rating: "<<resolve_rating<< std::endl;
+            }else{
             cout<<"resolve rating: "<<std::any_cast<light_up>(resolve["puzzle"]).rating<<endl;
+            }
         }
         if(show_iterations_count){
             cout<<"Iterations count: "<<std::any_cast<int>(resolve["iterations"])<<endl;
         }
-        if(show_curve){
+        if(show_curve == 'y'){
             for(auto x : std::any_cast<std::vector<int>>(resolve["rating"])){
                 cout<<x<<" ";
             }
