@@ -116,7 +116,6 @@ int roulette(std::vector<double> res_for_pop){
     }
 }
 
-
 std::map<std::string,std::any> genetic_alg(light_up board_to_solve,int iterations,double mutation_prob){
     std::map<std::string,std::any> result;
     std::vector<int> rating;
@@ -134,7 +133,63 @@ std::map<std::string,std::any> genetic_alg(light_up board_to_solve,int iteration
         for(int i=0;i<preavious_pop.size();i++){
             new_pop.push_back(preavious_pop[roulette(actual_pop_fitness)]);
         }
+        for(int i=1;i<new_pop.size();i=i+2){
+            population_t pop_of_two = {new_pop[i],new_pop[i-1]};
 
+            pop_of_two = one_point_crossover(pop_of_two[0],pop_of_two[1]);
+
+            pop_of_two[0] = prob_mutation(pop_of_two[0],mutation_prob);
+            pop_of_two[1] = prob_mutation(pop_of_two[1],mutation_prob);
+            new_pop[i] = pop_of_two[0];
+            new_pop[i-1] = pop_of_two[1];
+        }
+        actual_pop_fitness = fitnnes_function(board_to_solve, new_pop);
+
+        double best_score = 0;
+        for(int i =0;i<actual_pop_fitness.size();i++){
+            if(actual_pop_fitness[i]>best_score){
+                best_score = actual_pop_fitness[i];
+                result["puzzle"] = new_pop[i];
+            }
+        }
+
+        rating.push_back(best_score);
+        preavious_pop = new_pop;
+        new_pop.clear();
+        number++;
+        std::cout<<"best score in generation"<<best_score<<std::endl;
+        result["best_score"] = best_score;
+        if(best_score==1){
+            break;
+        }
+    }
+    std::vector<double> result_fitness = fitnnes_function(board_to_solve,new_pop);
+
+
+    result["iterations"] = number;
+    result["rating"] = rating;
+    return result;
+}
+
+std::map<std::string, std::any> genetic_alg_omp(light_up board_to_solve, int iterations, double mutation_prob){
+    std::map<std::string,std::any> result;
+    std::vector<int> rating;
+    int number=0;
+    population_t preavious_pop;
+    for(int i=0;i<1000;i++){
+        preavious_pop.push_back(create_chromosome(pow(board_to_solve.size,2)));
+    }
+
+
+    std::vector<double> actual_pop_fitness = fitnnes_function(board_to_solve, preavious_pop);
+
+    population_t new_pop;
+#pragma omp parallel schedule(dynamic)
+    for(int i=0;i<iterations;i++){
+        for(int i=0;i<preavious_pop.size();i++){
+            new_pop.push_back(preavious_pop[roulette(actual_pop_fitness)]);
+        }
+#pragma omp parallel for
         for(int i=1;i<new_pop.size();i=i+2){
                 population_t pop_of_two = {new_pop[i],new_pop[i-1]};
 
@@ -157,9 +212,11 @@ std::map<std::string,std::any> genetic_alg(light_up board_to_solve,int iteration
 
         rating.push_back(best_score);
         preavious_pop = new_pop;
+        result["last_pop"];
         new_pop.clear();
         number++;
         std::cout<<"best score in generation"<<best_score<<std::endl;
+        result["best_score"] = best_score;
         if(best_score==1){
             break;
         }
@@ -172,3 +229,53 @@ std::map<std::string,std::any> genetic_alg(light_up board_to_solve,int iteration
     return result;
 }
 
+void island_omp(light_up board_to_solve,int iterations,double mutation_prob,int number_of_island, int change_on_iteration){
+    using namespace std;
+    std::map<std::string,std::any> result;
+
+//    Zainicjowanie i wypełnienie wysp
+    vector<population_t> islands;
+//    population_t starting_population;
+//    for(int i=0;i<10;i++){
+//        starting_population.push_back(create_chromosome(pow(board_to_solve.size,2)));
+//    }
+//    for(int i=0;i<number_of_island;i++){
+//        islands.push_back(starting_population);
+//    }
+    islands.push_back({{1},{1},{1},{1},{1},{1}});
+    islands.push_back({{2},{2},{2},{2},{2},{2}});
+    islands.push_back({{3},{3},{3},{3},{3},{3}});
+//    Rozdzielenie wątków per wyspa
+#pragma omp parallel schedule(static, number_of_island)
+    for (auto it = std::begin(islands); it != std::end(islands); ++it) {
+        std::size_t index = std::distance(std::begin(islands), it);
+
+        for(int i=0;i<iterations;i++){
+
+
+            if(i==change_on_iteration){
+                cout<<"\n Zamiana populacji ["<<index<<"]"<<endl;
+
+                if(index+1 == number_of_island){
+                    for(int x = 0; x<5;x++){
+                        cout<<islands[0][x];
+                        islands[0][islands[0].size()-x-1] = islands[0][x];
+                        islands[0][x] = islands[index][x];
+                        cout<<"=";
+                        cout<<islands[index][x];
+                    }
+                }else{
+                    for(int x = 0; x<5;x++){
+                        cout<<islands[0][x];
+                        islands[index+1][islands[index+1].size()-x-1] = islands[index+1][x];
+                        islands[index+1][x] = islands[index][x];
+                        cout<<"=";
+                        cout<<islands[index][x];
+
+                    }
+                }
+                cout<<"\n";
+            }
+        }
+    }
+}
